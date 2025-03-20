@@ -62,4 +62,16 @@ public class MyGraph <Ttype> {
 	//addEdge
 	//print
 	//makeEmpty
+	public void makeEmpty() {
+		if(!isEmpty()) {
+			size = DEFAULT_SIZE;
+			counter = 0;
+			vertices = (Ttype[])new Object[size];
+			edges = new int[size][size];
+			System.gc();
+		}
+	}
+	
+	
+	
 }
