@@ -59,9 +59,39 @@ public class MyGraph <Ttype> {
 
 	
 	//addVertice
+	public void addVertice(Ttype element) throws Exception{
+		if(element == null)
+		{
+			throw new Exception("Padotais elements nevar būt bez references.");
+		}
+		
+		if(isVerticeExist(element))
+		{
+			throw new Exception("Tāda virsotne jau eksistē");
+		}
+		
+		vertices[counter] = element;
+		counter++;
+		
+	}
+	
+	
+	private boolean isVerticeExist(Ttype element) {
+		
+		for(int i = 0; i < counter; i++)
+		{
+			if(vertices[i].equals(element)) {
+				return true;
+			}
+		}
+		return false;
+		
+	}
+	
+	
 	//addEdge
 	//print
-	//makeEmpty
+
 	public void makeEmpty() {
 		if(!isEmpty()) {
 			size = DEFAULT_SIZE;
