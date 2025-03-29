@@ -36,8 +36,12 @@ public class MainService {
 			myMap.addEdge("Washington", "Atlanta", 600);
 			myMap.addEdge("Washington", "Dallas", 1300);
 			
+			System.out.println("----------------PRINT GRAPH---------------");
 			myMap.print();
-			
+			//TODO lai meklētu ceļus vairākkārtīgi, nepieciešams isVerticeVistited atkal uztaisīt uz false
+			System.out.println("----------------SEARCH PATH---------------");
+			System.out.println(myMap.searchPathUsingDepthFirst("Austin", "Washington"));
+			System.out.println(myMap.searchPathUsingDepthFirst("Austin", "Chicago"));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

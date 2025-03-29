@@ -1,5 +1,8 @@
 package datastr;
 
+import java.util.ArrayList;
+import java.util.Stack;
+
 public class MyGraph <Ttype> {
 
 	private Ttype[] vertices;
@@ -182,6 +185,91 @@ public class MyGraph <Ttype> {
 		}
 	}
 	
+	public String searchPathUsingDepthFirst(Ttype elementFrom, Ttype elementTo) throws Exception{
+		if(elementFrom == null || elementTo == null)
+		{
+			throw new Exception("Kāds no ievades parametriem nav atbilstošs");
+		}
+		
+		if(!isVerticeExist(elementFrom))
+		{
+			throw new Exception("Virsotne, no kura vēlas veidot saiti, neeksistē grafā");
+		}
+		
+		if(!isVerticeExist(elementTo))
+		{
+			throw new Exception("Virsotne, uz kuru vēlas veidot saiti, neeksistē grafā");
+		}
+		
+		
+		if(elementFrom.equals(elementTo))
+		{
+			throw new Exception("Abas virsotnes sakrīt, tāpēc ceļu nav iespejams atrast");
+		}
+		
+		for(int i = 0; i < counter ;i++)
+		{
+			isVerticeVisited[i] = false;
+		}
+		
+		
+		Stack<Ttype> verticesInStack = new Stack<>();
+		verticesInStack.push(elementFrom);
+		int indexOfVertice = getIndexOfVertice(elementFrom);
+		isVerticeVisited[indexOfVertice] = true;
+		String resultPath = "PATH";
+		
+		do
+		{
+			
+			Ttype elementFromStack = verticesInStack.pop();//iedos elementu, kurš tiks izdēst
+			if(elementFromStack.equals(elementTo)) {
+				resultPath += " -> " + elementFromStack + "\n";
+				return resultPath;
+			}
+			else
+			{
+				resultPath += " -> " + elementFromStack;
+				indexOfVertice = getIndexOfVertice(elementFromStack);
+				isVerticeVisited[indexOfVertice] = true;
+				
+				//atrast visus kaimiņu virsotnes un ielikt stekā
+				ArrayList<Ttype> allNeighbours = getNeighbours(indexOfVertice);
+				
+				for(Ttype tempV : allNeighbours) {
+					int indexOfNeighbour = getIndexOfVertice(tempV);
+					if(isVerticeVisited[indexOfNeighbour] == false)
+					{
+						verticesInStack.push(tempV);
+					}
+				}
+				
+			}
+	
+		}
+		while(!verticesInStack.isEmpty());
+		
+		return "Ceļš nav atrasts";
+		
+		
+	}
+	
+	//ejam cauri 2D saišu masīvam un mēginām atrast visas saites konkrētajai virsotnei un atgriežam virsotnes, uz kurām ir šīs saites
+	private ArrayList<Ttype> getNeighbours(int indexOfVertice)
+	{
+		ArrayList<Ttype> result = new ArrayList<>();
+		
+		for(int i = 0; i < counter; i++)
+		{
+			if(edges[indexOfVertice][i] > 0)//pārbaudām, vai eksistē saite ar padoto pilsētu
+			{
+				Ttype verticeWithEdge = vertices[i];
+				result.add(verticeWithEdge);
+			}
+		}
+		return result;
+		
+	}
 	
 	
 }
