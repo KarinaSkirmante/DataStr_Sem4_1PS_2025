@@ -80,7 +80,7 @@ public class MyGraph <Ttype> {
 		
 	}
 	
-	
+	//TODO var veikt optimizācija, kur apvieno šo funkciju ar getIndexOfVertice un meklē abus elementu vienā for ciklā
 	private boolean isVerticeExist(Ttype element) {
 		
 		for(int i = 0; i < counter; i++)
@@ -139,6 +139,30 @@ public class MyGraph <Ttype> {
 	
 	
 	//print
+	public void print() throws Exception
+	{
+		if(isEmpty())
+		{
+			throw new Exception("Grafs ir tukšs un nav elementu, ko izprintēt");
+		}
+		
+		
+		for(int i = 0; i < counter; i++) //rindas
+		{
+			System.out.print(vertices[i] + " -> ");
+			
+			for(int j = 0; j < counter ; j++) {//kolonnas
+				if(edges[i][j] > 0)//eksistē saite (ceļš)
+				{
+					System.out.print( vertices[j] + " (" + edges[i][j] + "); ");
+				}
+			}
+			System.out.println();
+			
+		}
+		
+	}
+	
 
 	public void makeEmpty() {
 		if(!isEmpty()) {
