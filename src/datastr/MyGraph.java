@@ -70,6 +70,11 @@ public class MyGraph <Ttype> {
 			throw new Exception("Tāda virsotne jau eksistē");
 		}
 		
+		if(isFull()) {
+			resize();
+		}
+		
+		
 		vertices[counter] = element;
 		counter++;
 		
