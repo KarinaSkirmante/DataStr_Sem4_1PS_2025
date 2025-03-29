@@ -95,6 +95,49 @@ public class MyGraph <Ttype> {
 	
 	
 	//addEdge
+	public void addEdge(Ttype elementFrom, Ttype elementTo, int weigth) throws Exception {
+		if(elementFrom == null || elementTo == null || weigth <= 0)
+		{
+			throw new Exception("Kāds no ievades parametriem nav atbilstošs");
+		}
+		
+		if(!isVerticeExist(elementFrom))
+		{
+			throw new Exception("Virsotne, no kura vēlas veidot saiti, neeksistē grafā");
+		}
+		
+		if(!isVerticeExist(elementTo))
+		{
+			throw new Exception("Virsotne, uz kuru vēlas veidot saiti, neeksistē grafā");
+		}
+		
+		int indexOfElementFrom = getIndexOfVertice(elementFrom);
+		int indexOfElementTo = getIndexOfVertice(elementTo);
+		
+		//TODO var apdomā, vai neļaut vairākus ceļus starp vienām un tam pašām divām pilsētām
+		int possibleExistingEdge = edges[indexOfElementFrom][indexOfElementTo];
+		if(possibleExistingEdge > 0)
+		{
+			throw new Exception
+			("Savienojums starp " + elementFrom + " un " + elementTo + " jau eksistē");
+		}
+		
+		edges[indexOfElementFrom][indexOfElementTo] = weigth;
+		
+	}
+	
+	
+	private int getIndexOfVertice(Ttype element) {
+		for(int i = 0; i < counter; i++)
+		{
+			if(vertices[i].equals(element)) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	
+	
 	//print
 
 	public void makeEmpty() {
