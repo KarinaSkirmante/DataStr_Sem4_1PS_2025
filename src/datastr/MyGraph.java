@@ -3,6 +3,7 @@ package datastr;
 public class MyGraph <Ttype> {
 
 	private Ttype[] vertices;
+	private boolean[] isVerticeVisited;
 	private int[][] edges;
 	private final int DEFAULT_SIZE = 10;
 	private int size = DEFAULT_SIZE;
@@ -12,6 +13,7 @@ public class MyGraph <Ttype> {
 	{
 		vertices = (Ttype[])new Object[size];
 		edges = new int[size][size];
+		isVerticeVisited = new boolean[size];
 	}
 	
 	public MyGraph(int inputSize) {
@@ -20,6 +22,7 @@ public class MyGraph <Ttype> {
 		}
 		vertices = (Ttype[])new Object[size];
 		edges = new int[size][size];
+		isVerticeVisited = new boolean[size];
 	}
 	public boolean isFull()
 	{
@@ -40,9 +43,12 @@ public class MyGraph <Ttype> {
 		size = (counter < 100) ? size * 2 : (int)(size * 1.5);
 		Ttype[] newVertices = (Ttype[])new Object[size];
 		int[][] newEdges = new int[size][size];
+		boolean[] newIsVerticeVisited = new boolean[size];
+		
 		
 		for(int i = 0; i < counter; i++) {
 			newVertices[i] = vertices[i];
+			newIsVerticeVisited[i] = isVerticeVisited[i];
 		}
 		
 		for(int i = 0; i < counter; i++) {
@@ -53,6 +59,7 @@ public class MyGraph <Ttype> {
 		
 		vertices = newVertices;
 		edges = newEdges;
+		isVerticeVisited = newIsVerticeVisited;
 		System.gc();
 		
 	}
@@ -170,6 +177,7 @@ public class MyGraph <Ttype> {
 			counter = 0;
 			vertices = (Ttype[])new Object[size];
 			edges = new int[size][size];
+			isVerticeVisited = new boolean[size];
 			System.gc();
 		}
 	}
